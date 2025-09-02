@@ -1,15 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Button from "@/components/atoms/Button";
+import { categoryService } from "@/services/api/categoryService";
+import ApperIcon from "@/components/ApperIcon";
+import CategoryItem from "@/components/molecules/CategoryItem";
 import Input from "@/components/atoms/Input";
 import Select from "@/components/atoms/Select";
-import CategoryItem from "@/components/molecules/CategoryItem";
-import ApperIcon from "@/components/ApperIcon";
-import { categoryService } from "@/services/api/categoryService";
+import Button from "@/components/atoms/Button";
 
-const Sidebar = ({ categories, onCategoriesUpdate, taskCounts }) => {
+const Sidebar = ({ categories, onCategoriesUpdate, taskCounts, user, onLogout }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [formData, setFormData] = useState({
@@ -87,15 +87,28 @@ const Sidebar = ({ categories, onCategoriesUpdate, taskCounts }) => {
       {/* Desktop Sidebar */}
       <div className="hidden lg:block w-80 bg-white border-r border-gray-200 h-screen overflow-y-auto">
         <div className="p-6">
-          {/* Header */}
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
-              <ApperIcon name="CheckSquare" size={20} className="text-white" />
+{/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
+                <ApperIcon name="CheckSquare" size={20} className="text-white" />
+              </div>
+              <div>
+                <h1 className="font-display font-bold text-xl text-gradient">TaskFlow</h1>
+                <p className="text-sm text-gray-600">Organize your day</p>
+              </div>
             </div>
-            <div>
-              <h1 className="font-display font-bold text-xl text-gradient">TaskFlow</h1>
-              <p className="text-sm text-gray-600">Organize your day</p>
-            </div>
+            {user && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onLogout}
+                className="p-2"
+                title="Logout"
+              >
+                <ApperIcon name="LogOut" size={16} />
+              </Button>
+            )}
           </div>
 
           {/* Main Navigation */}

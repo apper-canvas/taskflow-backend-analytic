@@ -1,12 +1,14 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "@/components/organisms/Sidebar";
 import { useTasks } from "@/hooks/useTasks";
 import { useCategories } from "@/hooks/useCategories";
+import { useAuth } from "@/hooks/useAuth";
+import React from "react";
+import Sidebar from "@/components/organisms/Sidebar";
 
 const Layout = () => {
   const { categories, loading: categoriesLoading, error: categoriesError, updateCategories } = useCategories();
   const { tasks, loading: tasksLoading, error: tasksError } = useTasks();
-
+  const { user, logout } = useAuth();
   // Calculate task counts for each category
   const taskCounts = {};
   tasks.forEach(task => {
@@ -17,10 +19,12 @@ const Layout = () => {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <Sidebar 
+<Sidebar 
         categories={categories}
         onCategoriesUpdate={updateCategories}
         taskCounts={taskCounts}
+        user={user}
+        onLogout={logout}
       />
       
       <main className="flex-1 overflow-hidden">

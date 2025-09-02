@@ -1,0 +1,138 @@
+@import url('react-toastify/dist/ReactToastify.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body bg-gray-50 text-gray-900;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-sm border border-white/20;
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #5B4FE9 0%, #8B85F0 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8A8A 100%);
+  }
+
+  .gradient-success {
+    background: linear-gradient(135deg, #4ECDC4 0%, #6EE5DB 100%);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .shadow-soft {
+    box-shadow: 0 4px 20px rgba(91, 79, 233, 0.1);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .priority-high {
+    @apply border-l-4 border-accent bg-red-50;
+  }
+
+  .priority-medium {
+    @apply border-l-4 border-warning bg-yellow-50;
+  }
+
+  .priority-low {
+    @apply border-l-4 border-success bg-green-50;
+  }
+}
+
+/* Toast Styling */
+.Toastify__toast-container {
+  width: 380px !important;
+  max-width: 90vw !important;
+}
+
+.Toastify__toast {
+  @apply rounded-xl shadow-elevated border-0 font-body;
+  padding: 16px 20px !important;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #4ECDC4 0%, #6EE5DB 100%) !important;
+  color: white !important;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8A8A 100%) !important;
+  color: white !important;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #4D96FF 0%, #6BAAFF 100%) !important;
+  color: white !important;
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
+
+/* Animation Classes */
+.task-completed {
+  animation: taskComplete 0.5s ease-out forwards;
+}
+
+@keyframes taskComplete {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(0.95) rotate(1deg); opacity: 0.8; }
+  100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+}
+
+.confetti-burst {
+  position: relative;
+  overflow: visible;
+}
+
+.confetti-burst::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #4ECDC4, #FFE66D, #FF6B6B);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: confettiPop 0.6s ease-out;
+}
+
+@keyframes confettiPop {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+}
